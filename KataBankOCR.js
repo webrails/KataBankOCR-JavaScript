@@ -25,24 +25,13 @@ function KataBankOCR() {
 
     // Takes an array of lines that represent the number to return
     this.processEntry = function (entry) {
-        var numberChars, digitChars, self;
+        var self;
         self = this;
-        digitChars = "";
-        numberChars = "";
-        _.each(_.range(0, this.config.charsPerLine, this.config.charsPerDigitPerLine), function (index) {
-
-//            _.each(entry, function (line) {
-//                digitChars += line.substr(index, self.config.charsPerDigitPerLine);
-//            });
-//            numberChars += self.charsValueMap(digitChars);
-//            digitChars = "";
-
-            numberChars += self.charsValueMap(_.reduce(entry, function (memo, line) {
-                return memo + line.substr(index, self.config.charsPerDigitPerLine);
+        return parseInt(_.reduce(_.range(0, this.config.charsPerLine, this.config.charsPerDigitPerLine), function (numberChars, index) {
+            numberChars += self.charsValueMap(_.reduce(entry, function (digitChars, line) {
+                return digitChars + line.substr(index, self.config.charsPerDigitPerLine);
             }, ""));
-
-        });
-        return parseInt(numberChars, 10);
+        }, ""), 10);
     };
 
     // Takes a file and returns an Array of numbers representing the entries of the file
