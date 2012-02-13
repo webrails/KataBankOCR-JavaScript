@@ -20,7 +20,7 @@
             it("should be a function", function () {
                 expect(_.isFunction(this.kataBankOCR.processFile)).toBeTruthy();
             });
-            xit("should return an empty Array", function () {
+            it("should return an empty Array", function () {
                 expect(_.isArray(this.kataBankOCR.processFile(""))).toBeTruthy();
                 expect(this.kataBankOCR.processFile("")).toEqual([]);
             });
@@ -29,9 +29,12 @@
                 expect(this.kataBankOCR.processFile(this.test123456789).length).toEqual(1);
                 expect(this.kataBankOCR.processFile(this.test123456789)[0]).toEqual(123456789);
             });
-            xit("should return an Array with two arguments", function () {
+            it("should return an Array with two arguments", function () {
                 var fileWithTwoEntries = this.test123456789 + "\n" + this.test123456781;
+                console.log(fileWithTwoEntries);
                 expect(_.isArray(this.kataBankOCR.processFile(fileWithTwoEntries))).toBeTruthy();
+                var result2 = this.kataBankOCR.processFile(fileWithTwoEntries);
+                console.log('result2: ' + result2);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries).length).toEqual(2);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[0]).toEqual(123456789);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);

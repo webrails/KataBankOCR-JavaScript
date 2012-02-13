@@ -64,10 +64,10 @@ function KataBankOCR() {
 //        console.log('howManyLines: ' + howManyLines.length);
         _.each(file.split(self.config.lineBreak), function (line, index) {
 
-//            console.log('line: ' + line);
-//            console.log('index: ' + index);
+            console.log('line: ' + line);
+            console.log('index: ' + index);
             entry.push(line);
-            if (index === self.config.linesPerEntry - 1) {
+            if (index % self.config.linesPerEntry === self.config.linesPerEntry - 1) {
 //                console.log('entry length: ' + entry.length);
 //                console.log('entry: ' + entry);
                 numbers.push(self.processEntry(entry));
