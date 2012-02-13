@@ -9,10 +9,6 @@ function KataBankOCR() {
         linesPerEntry:4,
         charsPerDigitPerLine:3,
         digitsPerLine:9,
-        charsPerLine:27, //(function () {
-//            console.log('hui');
-//            return this.config.charsPerDigitPerLine * this.config.digitsPerLine;
-//        })(),
         lineBreak:"\n"
     };
 
@@ -37,7 +33,7 @@ function KataBankOCR() {
         _.each(file.split(self.config.lineBreak), function (line, index) {
             entry.push(line);
             if (index % self.config.linesPerEntry === self.config.linesPerEntry - 1) {
-                numbers.push(parseInt(_.reduce(_.range(0, self.config.charsPerLine, self.config.charsPerDigitPerLine),
+                numbers.push(parseInt(_.reduce(_.range(0, self.config.charsPerDigitPerLine * self.config.digitsPerLine, self.config.charsPerDigitPerLine),
                     function (numberChars, index) {
                         return numberChars += self.charsValueMap[_.reduce(entry, function (digitChars, line) {
                             return digitChars + line.substr(index, self.config.charsPerDigitPerLine);
