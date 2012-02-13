@@ -28,18 +28,6 @@ function KataBankOCR() {
         " _ |_| _|   ":"9"
     };
 
-    // Takes an array of lines that represent the number to return
-    this.processEntry = function (entry) {
-        var self;
-        self = this;
-        return parseInt(_.reduce(_.range(0, self.config.charsPerLine, self.config.charsPerDigitPerLine),
-            function (numberChars, index) {
-                return numberChars += self.charsValueMap[_.reduce(entry, function (digitChars, line) {
-                    return digitChars + line.substr(index, self.config.charsPerDigitPerLine);
-                }, "")];
-            }, ""), 10);
-    };
-
     // Takes a file and returns an Array of numbers representing the entries of the file
     this.processFile = function (file) {
         var numbers, entry, self;
@@ -49,7 +37,12 @@ function KataBankOCR() {
         _.each(file.split(self.config.lineBreak), function (line, index) {
             entry.push(line);
             if (index % self.config.linesPerEntry === self.config.linesPerEntry - 1) {
-                numbers.push(self.processEntry(entry));
+                numbers.push(parseInt(_.reduce(_.range(0, self.config.charsPerLine, self.config.charsPerDigitPerLine),
+                    function (numberChars, index) {
+                        return numberChars += self.charsValueMap[_.reduce(entry, function (digitChars, line) {
+                            return digitChars + line.substr(index, self.config.charsPerDigitPerLine);
+                        }, "")];
+                    }, ""), 10));
                 entry = [];
             }
         });
