@@ -31,10 +31,7 @@
             });
             it("should return an Array with two arguments", function () {
                 var fileWithTwoEntries = this.test123456789 + "\n" + this.test123456781;
-                console.log(fileWithTwoEntries);
                 expect(_.isArray(this.kataBankOCR.processFile(fileWithTwoEntries))).toBeTruthy();
-                var result2 = this.kataBankOCR.processFile(fileWithTwoEntries);
-                console.log('result2: ' + result2);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries).length).toEqual(2);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[0]).toEqual(123456789);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);

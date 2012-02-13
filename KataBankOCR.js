@@ -30,27 +30,14 @@ function KataBankOCR() {
 
     // Takes an array of lines that represent the number to return
     this.processEntry = function (entry) {
-        console.log('processEntry entry length: ' + entry.length);
-        console.log('processEntry entry: ' + entry);
-        var self, config, charsValueMap;
+        var self;
         self = this;
-        config = self.config;
-        charsValueMap = self.charsValueMap;
-//        console.log(config);
-//        console.log(charsValueMap);
-        var returnReduce = _.reduce(_.range(0, config.charsPerLine, config.charsPerDigitPerLine),
+        return parseInt(_.reduce(_.range(0, self.config.charsPerLine, self.config.charsPerDigitPerLine),
             function (numberChars, index) {
-                console.log('processEntry numberChars: ' + numberChars + 'END');
-                console.log('processEntry index: ' + index);
-//                var
-                return numberChars += charsValueMap[_.reduce(entry, function (digitChars, line) {
-                    console.log('line: ' + line);
-                    console.log('digitChars: ' + digitChars);
-                    return digitChars + line.substr(index, config.charsPerDigitPerLine);
+                return numberChars += self.charsValueMap[_.reduce(entry, function (digitChars, line) {
+                    return digitChars + line.substr(index, self.config.charsPerDigitPerLine);
                 }, "")];
-            }, "");
-        console.log('returnReduce: ' + returnReduce);
-        return(parseInt(returnReduce, 10))
+            }, ""), 10);
     };
 
     // Takes a file and returns an Array of numbers representing the entries of the file
@@ -59,26 +46,13 @@ function KataBankOCR() {
         self = this;
         numbers = [];
         entry = [];
-//        console.log('file: ' + file + 'END');
-//        var howManyLines = file.split(self.config.lineBreak);
-//        console.log('howManyLines: ' + howManyLines.length);
         _.each(file.split(self.config.lineBreak), function (line, index) {
-
-            console.log('line: ' + line);
-            console.log('index: ' + index);
             entry.push(line);
             if (index % self.config.linesPerEntry === self.config.linesPerEntry - 1) {
-//                console.log('entry length: ' + entry.length);
-//                console.log('entry: ' + entry);
                 numbers.push(self.processEntry(entry));
                 entry = [];
             }
         });
-
-//        _.reduce(file.split(this.lineBreak), function() {
-//
-//        }, []);
-        console.log('numbers: ' + numbers);
         return numbers;
     };
 }
