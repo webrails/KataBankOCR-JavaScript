@@ -16,6 +16,10 @@
                                  "  | _| _|  | _||_   ||_|  |" + "\n" +
                                  "  ||_  _|  | _||_|  ||_|  |" + "\n" +
                                  "                           ";
+            this.test729135142 = " _  _  _     _  _        _ " + "\n" +
+                                 "  | _||_|  | _||_   ||_| _|" + "\n" +
+                                 "  ||_  _|  | _| _|  |  ||_ " + "\n" +
+                                 "                           ";
         });
         it("should be instantiable", function () {
             expect(this.kataBankOCR).toBeTruthy();
@@ -47,6 +51,15 @@
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[0]).toEqual(123456789);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[2]).toEqual(123136781);
+            });
+            it("should return an Array with four arguments", function () {
+                var fileWithTwoEntries = this.test123456789 + "\n" + this.test123456781 + '\n' + this.test123136781 + '\n' + this.test729135142;
+                expect(_.isArray(this.kataBankOCR.processFile(fileWithTwoEntries))).toBeTruthy();
+                expect(this.kataBankOCR.processFile(fileWithTwoEntries).length).toEqual(4);
+                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[0]).toEqual(123456789);
+                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);
+                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[2]).toEqual(123136781);
+                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[3]).toEqual(729135142);
             });
         });
     });

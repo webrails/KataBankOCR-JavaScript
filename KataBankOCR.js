@@ -26,9 +26,8 @@ function KataBankOCR() {
     this.processFile = function (file) {
         var numbers, entry, self;
         self = this;
-        numbers = [];
-        entry = [];
-        _.each(file.split(self.line_break), function (line, index) {
+        return _.reduce(file.split(self.line_break), function (numbers, line, index) {
+            entry = entry || [];
             entry.push(line);
             if (index % self.entry_lines === self.entry_lines - 1) {
                 numbers.push(parseInt(_.reduce(_.range(0, self.chars_digit_line * self.digits_line, self.chars_digit_line),
@@ -39,7 +38,7 @@ function KataBankOCR() {
                     }, ""), 10));
                 entry = [];
             }
-        });
-        return numbers;
+            return numbers;
+        }, []);
     };
 }
