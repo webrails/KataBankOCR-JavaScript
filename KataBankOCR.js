@@ -5,12 +5,10 @@ function KataBankOCR() {
     //  | _| _||_||_ |_   ||_||_|
     //  ||_  _|  | _||_|  ||_| _|
 
-    this.config = {
-        linesPerEntry:4,
-        charsPerDigitPerLine:3,
-        digitsPerLine:9,
-        lineBreak:"\n"
-    };
+    this.entry_lines = 4;
+    this.chars_digit_line = 3;
+    this.digits_line = 9;
+    this.line_break = '\n';
 
     this.charsValueMap = {
         "     |  |   ":"1",
@@ -30,13 +28,13 @@ function KataBankOCR() {
         self = this;
         numbers = [];
         entry = [];
-        _.each(file.split(self.config.lineBreak), function (line, index) {
+        _.each(file.split(self.line_break), function (line, index) {
             entry.push(line);
-            if (index % self.config.linesPerEntry === self.config.linesPerEntry - 1) {
-                numbers.push(parseInt(_.reduce(_.range(0, self.config.charsPerDigitPerLine * self.config.digitsPerLine, self.config.charsPerDigitPerLine),
+            if (index % self.entry_lines === self.entry_lines - 1) {
+                numbers.push(parseInt(_.reduce(_.range(0, self.chars_digit_line * self.digits_line, self.chars_digit_line),
                     function (numberChars, index) {
                         return numberChars += self.charsValueMap[_.reduce(entry, function (digitChars, line) {
-                            return digitChars + line.substr(index, self.config.charsPerDigitPerLine);
+                            return digitChars + line.substr(index, self.chars_digit_line);
                         }, "")];
                     }, ""), 10));
                 entry = [];
