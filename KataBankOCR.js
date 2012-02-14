@@ -24,7 +24,7 @@ function KataBankOCR() {
 
     // Takes a file and returns an Array of numbers representing the entries of the file
     this.processFile = function (file) {
-        var numbers, entry, self;
+        var entry, self;
         self = this;
         return _.reduce(file.split(self.line_break), function (numbers, line, index) {
             entry = entry || [];
