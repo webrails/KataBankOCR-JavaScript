@@ -45,21 +45,21 @@
                 expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);
             });
             it("should return an Array with three arguments", function () {
-                var fileWithTwoEntries = this.test123456789 + "\n" + this.test123456781 + '\n' + this.test123136781;
-                expect(_.isArray(this.kataBankOCR.processFile(fileWithTwoEntries))).toBeTruthy();
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries).length).toEqual(3);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[0]).toEqual(123456789);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[2]).toEqual(123136781);
+                var fileWithThreeEntries = this.test123456789 + "\n" + this.test123456781 + '\n' + this.test123136781;
+                expect(_.isArray(this.kataBankOCR.processFile(fileWithThreeEntries))).toBeTruthy();
+                expect(this.kataBankOCR.processFile(fileWithThreeEntries).length).toEqual(3);
+                expect(this.kataBankOCR.processFile(fileWithThreeEntries)[0]).toEqual(123456789);
+                expect(this.kataBankOCR.processFile(fileWithThreeEntries)[1]).toEqual(123456781);
+                expect(this.kataBankOCR.processFile(fileWithThreeEntries)[2]).toEqual(123136781);
             });
             it("should return an Array with four arguments", function () {
-                var fileWithTwoEntries = this.test123456789 + "\n" + this.test123456781 + '\n' + this.test123136781 + '\n' + this.test729135142;
-                expect(_.isArray(this.kataBankOCR.processFile(fileWithTwoEntries))).toBeTruthy();
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries).length).toEqual(4);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[0]).toEqual(123456789);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[1]).toEqual(123456781);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[2]).toEqual(123136781);
-                expect(this.kataBankOCR.processFile(fileWithTwoEntries)[3]).toEqual(729135142);
+                var fileWithFourEntries = this.test123456789 + "\n" + this.test123456781 + '\n' + this.test123136781 + '\n' + this.test729135142;
+                expect(_.isArray(this.kataBankOCR.processFile(fileWithFourEntries))).toBeTruthy();
+                expect(this.kataBankOCR.processFile(fileWithFourEntries).length).toEqual(4);
+                expect(this.kataBankOCR.processFile(fileWithFourEntries)[0]).toEqual(123456789);
+                expect(this.kataBankOCR.processFile(fileWithFourEntries)[1]).toEqual(123456781);
+                expect(this.kataBankOCR.processFile(fileWithFourEntries)[2]).toEqual(123136781);
+                expect(this.kataBankOCR.processFile(fileWithFourEntries)[3]).toEqual(729135142);
             });
         });
     });
