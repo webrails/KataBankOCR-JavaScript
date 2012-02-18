@@ -26,14 +26,14 @@ function KataBankOCR() {
     this.processFile = function (file) {
         var entry, self;
         self = this;
-        return _.reduce(file.split(self.line_break), function (numbers, line, index) {
+        return _.reduce(file.split(self.line_break), function (numbers, line, file_index) {
             entry = entry || [];
             entry.push(line);
-            if (index % self.entry_lines === self.entry_lines - 1) {
+            if (file_index % self.entry_lines === self.entry_lines - 1) {
                 numbers.push(parseInt(_.reduce(_.range(0, self.chars_digit_line * self.digits_line, self.chars_digit_line),
-                    function (numberChars, index) {
+                    function (numberChars, number_chars_index) {
                         return numberChars += self.charsValueMap[_.reduce(entry, function (digitChars, line) {
-                            return digitChars + line.substr(index, self.chars_digit_line);
+                            return digitChars + line.substr(number_chars_index, self.chars_digit_line);
                         }, "")];
                     }, ""), 10));
                 entry = [];
